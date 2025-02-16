@@ -91,12 +91,19 @@ return{
       local cmp = require("cmp")
       local luasnip = require("luasnip")
 
-    -- Setup for command-line completion
+      -- Setup for command-line completion with a different format
       cmp.setup.cmdline(':', {
         sources = {
           { name = 'cmdline' }
-        }
+        },
+        formatting = {
+          format = function(entry, vim_item)
+            vim_item.kind = "CMD"
+            return vim_item
+          end,
+        },
       })
+
 
 
       cmp.setup({
