@@ -47,6 +47,10 @@ return{
           cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
           capabilities = capabilities,
           on_attach = on_attach,
+          root_dir = function(fname)
+            -- Find the nearest .sln or .csproj, or fallback to the current working directory
+            return require("lspconfig.util").root_pattern("*.sln", "*.csproj", ".git")(fname) or vim.fn.getcwd()
+          end,
       })
 
       -- html
