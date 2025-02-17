@@ -43,14 +43,10 @@ return{
       })
 
       -- C#
-      lsp.omnisharp.setup({
-          cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
+      lsp.csharp_ls.setup({
+          cmd = { vim.fn.stdpath("data") .. "/mason/bin/csharp-ls" },
           capabilities = capabilities,
           on_attach = on_attach,
-          root_dir = function(fname)
-            -- Find the nearest .sln or .csproj, or fallback to the current working directory
-            return require("lspconfig.util").root_pattern("*.sln", "*.csproj", ".git")(fname) or vim.fn.getcwd()
-          end,
       })
 
       -- html
@@ -95,21 +91,6 @@ return{
       local cmp = require("cmp")
       local luasnip = require("luasnip")
 
-      -- Setup for command-line completion with a different format
-      cmp.setup.cmdline(':', {
-        sources = {
-          { name = 'cmdline' }
-        },
-        formatting = {
-          format = function(entry, vim_item)
-            vim_item.kind = "CMD"
-            return vim_item
-          end,
-        },
-      })
-
-
-
       cmp.setup({
         snippet = {
           expand = function(args)
@@ -152,4 +133,5 @@ return{
     end,
   },
 }
+
 
