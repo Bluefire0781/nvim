@@ -43,8 +43,8 @@ return{
       })
 
       -- C#
-      lsp.csharp_ls.setup({
-          cmd = { vim.fn.stdpath("data") .. "/mason/bin/csharp-ls" },
+      lsp.omnisharp.setup({
+          cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
           capabilities = capabilities,
           on_attach = on_attach,
       })
