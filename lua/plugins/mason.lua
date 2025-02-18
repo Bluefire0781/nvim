@@ -11,7 +11,7 @@ return{
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls"}, -- Automatically install these LSPs
+        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright"}, -- Automatically install these LSPs
         automatic_installation = true,
       })
     end,
@@ -67,6 +67,13 @@ return{
       --css
      lsp.cssls.setup({
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/vscode-css-language-server", "--stdio"},
+        capabilities = capabilities,
+        on_attach = on_attach,
+     })
+
+     --python
+     lsp.pyright.setup({
+        cmd = { vim.fn.stdpath("data") .. "/mason/bin/pyright-langserver", "--stdio"},
         capabilities = capabilities,
         on_attach = on_attach,
      })
