@@ -1,4 +1,5 @@
-vim.cmd("colorscheme onedark") -- or "tokyonight" for tokyonight theme
+--vim.cmd("colorscheme fluoro") -- colorscheme
 
-vim.opt.termguicolors = true -- bufferline
-require("bufferline").setup{} -- bufferline
+
+vim.opt.termguicolors = true  -- bufferline
+require("bufferline").setup {} -- bufferline

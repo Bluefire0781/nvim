@@ -19,7 +19,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'nord', -- You can change this to another theme (e.g., 'dracula', 'onedark', etc.)
+        theme = 'fluoromachine', -- You can change this to another theme (e.g., 'dracula', 'onedark', etc.)
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = { 'NvimTree', 'packer' }, -- Disable lualine for specific filetypes

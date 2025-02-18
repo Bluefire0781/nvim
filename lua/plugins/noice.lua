@@ -40,6 +40,6 @@ return{
         command_palette = false, -- Disable command palette to keep it simple
       },
     })
+
   end,
 }
-

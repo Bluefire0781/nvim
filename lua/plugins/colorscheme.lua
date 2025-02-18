@@ -1,4 +1,18 @@
 return {
-  { "navarasu/onedark.nvim", name = "onedark", priority = 1000 },
-}
+    {
+        'maxmx03/fluoromachine.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function ()
+         local fm = require 'fluoromachine'
 
+         fm.setup {
+            glow = false,
+            theme = 'fluoromachine',
+            transparent = false,
+         }
+
+         vim.cmd.colorscheme 'fluoromachine'
+        end
+    }
+}
