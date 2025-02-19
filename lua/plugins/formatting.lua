@@ -15,7 +15,6 @@ return {
         json = { 'prettier' },
         css = { 'prettier' },
         markdown = { 'prettier' },
-        lua = { 'stylelua' },
         csharp = { 'csharpier' },
         python = { 'isort', 'black' },
       },
