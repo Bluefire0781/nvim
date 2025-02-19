@@ -17,6 +17,7 @@ return {
         markdown = { 'prettier' },
         lua = { 'stylelua' },
         csharp = { 'csharpier' },
+        python = { 'isort', 'black' },
       },
       format_on_save = {
         lsp_fallback = true,
