@@ -30,7 +30,7 @@ return {
 
       --lua
       lsp.lua_ls.setup({
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server"},
+        cmd = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server" },
         settings = {
           Lua = {
             diagnostics = {
