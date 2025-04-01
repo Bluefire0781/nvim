@@ -77,6 +77,13 @@ return {
         capabilities = capabilities,
         on_attach = on_attach,
       })
+
+      --astgrep 
+      lsp.ast_grep.setup({
+        cmd = { vim.fn.stdpath("data") .. "/mason/bin/ast-grep", "--stdio" },
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
     end,
   },
 
@@ -119,6 +126,7 @@ return {
           { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },
+          { name = "cmd" },
         }),
         formatting = {
           format = lspkind.cmp_format({
