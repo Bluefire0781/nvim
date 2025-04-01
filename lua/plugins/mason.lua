@@ -78,9 +78,9 @@ return {
         on_attach = on_attach,
       })
 
-      --astgrep 
-      lsp.ast_grep.setup({
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/ast-grep", "--stdio" },
+      --bacon/rs
+      lsp.rust_analyzer.setup({
+        cmd = { vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer"},
         capabilities = capabilities,
         on_attach = on_attach,
       })
