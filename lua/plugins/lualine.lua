@@ -19,7 +19,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = 'fluoromachine', -- You can change this to another theme (e.g., 'dracula', 'onedark', etc.)
+        theme = 'kanagawa', -- You can change this to another theme (e.g., 'dracula', 'onedark', etc.)
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = { 'NvimTree', 'packer' }, -- Disable lualine for specific filetypes
@@ -29,7 +29,7 @@ return {
         lualine_b = { 'branch', 'diff', 'diagnostics' },
         lualine_c = {
           { 'filename', path = 1 }, -- Show full file path
-          { lsp_status, icon = "", color = { fg = "#98be65", gui = "bold" } },}, --lsp status
+          { lsp_status, icon = "", color = { fg = "#98be65", gui = "bold" } }, }, --lsp status
         lualine_x = { 'encoding', 'fileformat', 'filetype' },
         lualine_y = { 'progress' }, -- Show progress (percentage through file)
         lualine_z = { 'location' }, -- Show line and column number
@@ -42,7 +42,7 @@ return {
         lualine_y = {},
         lualine_z = {}
       },
-      tabline = {}, -- Add custom tabline configuration here, if needed
+      tabline = {},                            -- Add custom tabline configuration here, if needed
       extensions = { 'nvim-tree', 'fugitive' } -- Add extensions for plugins
     }
   end
