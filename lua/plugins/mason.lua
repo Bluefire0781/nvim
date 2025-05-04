@@ -80,7 +80,7 @@ return {
 
       --bacon/rs
       lsp.rust_analyzer.setup({
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer"},
+        cmd = { vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer" },
         capabilities = capabilities,
         on_attach = on_attach,
       })
@@ -110,6 +110,7 @@ return {
       cmp.setup({
         completion = {
           completeopt = "menu,menuone,preview,noselect",
+          keyword_length = 1,
         },
         snippet = {
           expand = function(args)
@@ -126,7 +127,6 @@ return {
           { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },
-          { name = "cmd" },
         }),
         formatting = {
           format = lspkind.cmp_format({
@@ -143,6 +143,16 @@ return {
             border = "rounded",
             scrollbar = "", -- other options
           },
+        },
+      })
+      -- Set up cmdline completion
+      cmp.setup.cmdline(":", {
+        completion = {
+          keyword_length = 1, -- Require at least 3 characters to trigger completion
+        },
+        sources = {
+          { name = "path" },
+          { name = "cmdline" }, -- Enable cmdline completion
         },
       })
     end,

@@ -35,3 +35,6 @@ vim.keymap.set("n", "<leader>lp", ":LivePreview start<CR>", { desc = "LivePrevie
 
 -- copilot
 vim.api.nvim_set_keymap('i', '<C-Tab>', '<Plug>(copilot-complete)', { noremap = true, silent = true })
+
+--Transparent
+vim.api.nvim_set_keymap("n", "<leader>s", ":TransparentToggle<cr>", { desc = "Transparent" })
