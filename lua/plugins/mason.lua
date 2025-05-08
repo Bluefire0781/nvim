@@ -2,16 +2,18 @@ return {
   {
     "williamboman/mason.nvim",
     config = function()
-      require("mason").setup()
+      require("mason").setup({
+        providers = { "mason.providers.client", "mason.providers.registry-api", }
+      })
     end,
   },
 
   {
-    "williamboman/mason-lspconfig.nvim", -- Mason LSP bridge
-    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig"},
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright" }, -- Automatically install these LSPs
+        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "rust_analyzer" },
         automatic_installation = true,
       })
     end,
@@ -143,16 +145,6 @@ return {
             border = "rounded",
             scrollbar = "", -- other options
           },
-        },
-      })
-      -- Set up cmdline completion
-      cmp.setup.cmdline(":", {
-        completion = {
-          keyword_length = 1, -- Require at least 3 characters to trigger completion
-        },
-        sources = {
-          { name = "path" },
-          { name = "cmdline" }, -- Enable cmdline completion
         },
       })
     end,

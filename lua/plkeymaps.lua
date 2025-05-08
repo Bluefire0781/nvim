@@ -33,8 +33,10 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit Terminal Insert Mode"
 -- live preview
 vim.keymap.set("n", "<leader>lp", ":LivePreview start<CR>", { desc = "LivePreview" })
 
--- copilot
-vim.api.nvim_set_keymap('i', '<C-Tab>', '<Plug>(copilot-complete)', { noremap = true, silent = true })
-
 --Transparent
 vim.api.nvim_set_keymap("n", "<leader>s", ":TransparentToggle<cr>", { desc = "Transparent" })
+
+--CCC
+vim.api.nvim_set_keymap("n", "<leader>c", "<nop>", {desc = "CCC"})
+vim.api.nvim_set_keymap("n","<leader>cc", ":CccPick<cr>", {desc = "CccPick"})
+vim.api.nvim_set_keymap("n","<leader>ch", ":CccHighlighterToggle<cr>", {desc = "CccToggle"})
