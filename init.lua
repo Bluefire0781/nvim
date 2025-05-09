@@ -25,7 +25,7 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
-for _, name in ipairs({ "plkeymaps", "ploptions", "transconfig"}) do
+for _, name in ipairs({ "plkeymaps", "ploptions" }) do
   require(name)
 end
 require("luasnip.loaders.from_lua").load({ paths = "C:/Users/andre/AppData/Local/nvim/snippets" }) -- Load custom snippets

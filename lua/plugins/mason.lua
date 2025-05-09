@@ -2,15 +2,13 @@ return {
   {
     "williamboman/mason.nvim",
     config = function()
-      require("mason").setup({
-        providers = { "mason.providers.client", "mason.providers.registry-api", }
-      })
+      require("mason").setup()
     end,
   },
 
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig"},
+    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "rust_analyzer" },

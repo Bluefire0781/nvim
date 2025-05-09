@@ -12,14 +12,14 @@ ls.add_snippets("html", {
       "<head>",
       "  <meta charset=\"UTF-8\">",
       "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
-      "  <title>", }), i(1, "Document"), t({"</title>",
-      "</head>",
-      "<body>",
-      "  "}), i(2, "Content here"), t({
-      "",
-      "</body>",
-      "</html>",
-    }),
+      "  <title>", }), i(1, "Document"), t({ "</title>",
+    "</head>",
+    "<body>",
+    "  " }), i(2, "Content here"), t({
+    "",
+    "</body>",
+    "</html>",
+  }),
   }),
 
   -- Link CSS
@@ -29,7 +29,7 @@ ls.add_snippets("html", {
 
   --head
   s("~head", {
-    t({"<head>", "</head>"})
+    t({ "<head>", "</head>" })
   }),
 
   -- Script Tag
@@ -39,11 +39,11 @@ ls.add_snippets("html", {
 
   -- Div Container
   s("~div", {
-    t('<div class="'), i(1, "container"), t('">'), t({"",
-      "  "}), i(2, "Content"), t({
-      "",
-      "</div>",
-    }),
+    t('<div class="'), i(1, "container"), t('">'), t({ "",
+    "  " }), i(2, "Content"), t({
+    "",
+    "</div>",
+  }),
   }),
 
   -- Paragraph
