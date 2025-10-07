@@ -37,6 +37,10 @@ vim.keymap.set("n", "<leader>lp", ":LivePreview start<CR>", { desc = "LivePrevie
 vim.api.nvim_set_keymap("n", "<leader>s", ":TransparentToggle<cr>", { desc = "Transparent" })
 
 --CCC
-vim.api.nvim_set_keymap("n", "<leader>c", "<nop>", {desc = "CCC"})
-vim.api.nvim_set_keymap("n","<leader>cc", ":CccPick<cr>", {desc = "CccPick"})
-vim.api.nvim_set_keymap("n","<leader>ch", ":CccHighlighterToggle<cr>", {desc = "CccToggle"})
+vim.api.nvim_set_keymap("n", "<leader>c", "<nop>", { desc = "CCC" })
+vim.api.nvim_set_keymap("n", "<leader>cc", ":CccPick<cr>", { desc = "CccPick" })
+vim.api.nvim_set_keymap("n", "<leader>ch", ":CccHighlighterToggle<cr>", { desc = "CccToggle" })
+
+--cmdline
+vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
+vim.keymap.set('n', '/', ':SearchBoxIncSearch<CR>', { noremap = true })

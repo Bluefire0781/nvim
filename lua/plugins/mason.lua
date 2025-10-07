@@ -21,21 +21,18 @@ return {
     "neovim/nvim-lspconfig",
 
     config = function()
-      local lsp = require("lspconfig")
+      --local lsp = require('lspconfig')
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local on_attach = function(client, bufnr)
-        -- Enable omnifunc for LSP-based completions
         vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
       end
 
-      --lua
-      lsp.lua_ls.setup({
+      -- Lua
+      vim.lsp.config('lua_ls', {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server" },
         settings = {
           Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
+            diagnostics = { globals = { "vim" } },
           },
         },
         on_attach = on_attach,
@@ -43,46 +40,46 @@ return {
       })
 
       -- C#
-      lsp.csharp_ls.setup({
+      vim.lsp.config('csharp_ls', {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/csharp-ls" },
-        capabilities = capabilities,
         on_attach = on_attach,
+        capabilities = capabilities,
       })
 
-      -- html
-      lsp.html.setup({
+      -- HTML
+      vim.lsp.config('html', {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/vscode-html-language-server", "--stdio" },
-        capabilities = capabilities,
         on_attach = on_attach,
+        capabilities = capabilities,
       })
 
-      --ts/ ls
-      lsp.ts_ls.setup({
+      -- TypeScript / JavaScript
+      vim.lsp.config('ts_ls', {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server", "--stdio" },
-        capabilities = capabilities,
         on_attach = on_attach,
+        capabilities = capabilities,
         filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
       })
 
-      --css
-      lsp.cssls.setup({
+      -- CSS
+      vim.lsp.config('cssls', {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/vscode-css-language-server", "--stdio" },
-        capabilities = capabilities,
         on_attach = on_attach,
+        capabilities = capabilities,
       })
 
-      --python
-      lsp.pyright.setup({
+      -- Python
+      vim.lsp.config('pyright', {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/pyright-langserver", "--stdio" },
-        capabilities = capabilities,
         on_attach = on_attach,
+        capabilities = capabilities,
       })
 
-      --bacon/rs
-      lsp.rust_analyzer.setup({
+      -- Rust
+      vim.lsp.config('rust_analyzer', {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer" },
-        capabilities = capabilities,
         on_attach = on_attach,
+        capabilities = capabilities,
       })
     end,
   },

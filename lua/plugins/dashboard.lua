@@ -3,26 +3,26 @@ return {
   event = 'VimEnter',
   config = function()
     require('dashboard').setup({
-      theme = 'doom',
+      --theme = 'doom',
       config = {
         -- Custom header with ASCII art
         header = {
-	  [[			      ]],
-	  [[			      ]],
-	  [[			      ]],
-	  [[			      ]],
-	  [[			      ]],
-          [[  _   _       _           ]],
-          [[ | \ | |     (_)          ]],
-          [[ |  \| |_   ___ _ __ ___  ]],
-          [[ | . ` \ \ / / | '_ ` _ \ ]],
-          [[ | |\  |\ V /| | | | | | |]],
-          [[ |_| \_| \_/ |_|_| |_| |_|]],
-	  [[			      ]],
-	  [[			      ]],
-	  [[			      ]],
-	  [[			      ]],
-	
+          [[			      ]],
+          [[			      ]],
+          [[			      ]],
+          [[			      ]],
+          [[			      ]],
+          [[  _     _                       _           ]],
+          [[ | |   | |                     (_)          ]],
+          [[ | |__ | |_   _  ___ _ ____   ___ _ __ ___  ]],
+          [[ | '_ \| | | | |/ _ \ '_ \ \ / / | '_ ` _ \ ]],
+          [[ | |_) | | |_| |  __/ | | \ V /| | | | | | |]],
+          [[ |_.__/|_|\__,_|\___|_| |_|\_/ |_|_| |_| |_|]],
+          [[			      ]],
+          [[			      ]],
+          [[			      ]],
+          [[			      ]],
+
         },
         -- Center options for actions
         center = {
@@ -61,11 +61,11 @@ return {
           },
         },
         footer = {
-           "Neovim Version: " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch,
-            "Current Time: " .. os.date("%H:%M:%S"),
+          "Neovim Version: " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch,
+          "Current Time: " .. os.date("%H:%M:%S"),
         },
       }
     })
   end,
-  dependencies = { {'nvim-tree/nvim-web-devicons'} }
+  dependencies = { { 'nvim-tree/nvim-web-devicons' } }
 }
