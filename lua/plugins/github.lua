@@ -1,12 +1,9 @@
 return {
   "github/copilot.vim",
-  config = function()
-    require("copilot").setup({
-      suggestion = {
-        enabled = false,
-        debounce = 250
-      },
-      panel = { enabled = false },
-    })
+  init = function()
+    vim.g.copilot_idle_delay = 600
+    vim.g.copilot_no_tab_map = true
+    vim.keymap.set("i", "<C-Enter>", 'copilot#Accept("\\<CR>")',
+      { silent = true, expr = true, noremap = true, replace_keycodes = false })
   end,
 }
