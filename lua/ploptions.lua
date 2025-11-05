@@ -2,7 +2,9 @@
 vim.opt.termguicolors = true
 
 -- Load pywal colorscheme and setup
-require('pywal').setup()
+vim.o.background = "dark" -- or "light" for light mode
+vim.cmd([[colorscheme gruvbox]])
+--require('pywal').setup()
 
 vim.api.nvim_set_hl(0, "String", { fg = "#03720a" })                 -- green
 vim.api.nvim_set_hl(0, "Comment", { fg = "#888888", italic = true }) -- gray
@@ -15,20 +17,6 @@ vim.api.nvim_set_hl(0, "Boolean", { fg = "#12c0c9", bold = true })   -- magenta
 
 -- Setup bufferline plugin
 require('bufferline').setup {}
-
--- Setup transparent plugin for specific highlight groups
-require('transparent').setup({
-  groups = {
-    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
-    'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
-    'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
-    'SignColumn', 'CursorLine', 'CursorLineNr', 'StatusLine', 'StatusLineNC',
-    'EndOfBuffer',
-  },
-  extra_groups = {},
-  exclude_groups = {},
-  on_clear = function() end,
-})
 
 -- Custom highlight override for PmenuSel
 --vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#2a2f4a", fg = "#4d0099", bold = true })

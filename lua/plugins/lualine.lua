@@ -4,7 +4,7 @@ return {
   config = function()
     -- custom lsp status functions
     local function lsp_status()
-      local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+      local clients = vim.lsp.get_clients({ bufnr = 0 })
       if #clients == 0 then
         return "No LSP"
       end
