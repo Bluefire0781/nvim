@@ -80,6 +80,16 @@ return {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer" },
         on_attach = on_attach,
         capabilities = capabilities,
+        settings = {
+          ["rust-analyzer"] = {
+            inlayHints = {
+              chainingHints = { enable = true },
+              closingBraceHints = { enable = true, minLines = 25 },
+              parameterHints = { enable = true },
+              typeHints = { enable = true },
+            },
+          },
+        },
       })
     end,
   },
