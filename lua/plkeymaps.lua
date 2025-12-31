@@ -44,3 +44,7 @@ vim.api.nvim_set_keymap("n", "<leader>ch", ":CccHighlighterToggle<cr>", { desc =
 --cmdline
 vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
 vim.keymap.set('n', '/', ':SearchBoxIncSearch<CR>', { noremap = true })
+
+--themeselector
+vim.api.nvim_set_keymap("n", "<leader>v", "<nop>", { desc = "Visual" })
+vim.api.nvim_set_keymap("n", "<leader>vt", ":Themery<cr>", { desc = "Theme", noremap = true, silent = true })
