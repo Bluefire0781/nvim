@@ -11,7 +11,7 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "rust_analyzer" },
+        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "rust_analyzer", "jdtls" },
         automatic_installation = true,
       })
     end,
@@ -71,6 +71,12 @@ return {
       -- Python
       vim.lsp.config('pyright', {
         cmd = { vim.fn.stdpath("data") .. "/mason/bin/pyright-langserver", "--stdio" },
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+
+      -- java
+      vim.lsp.config('jdtls', {
         on_attach = on_attach,
         capabilities = capabilities,
       })
