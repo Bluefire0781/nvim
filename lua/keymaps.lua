@@ -7,6 +7,8 @@ vim.keymap.set("n", "<leader>``", ":bd<cr>", { desc = "exit buffer" })
 -- yank to clipboard mappings
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "yank to clipboard" })
 
+--vsplit
+vim.keymap.set("n", "<leader>s", ":vsplit<cr>", { desc = "Split" })
 -- save and exit mappings
 vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save without exit" })
 vim.keymap.set("n", "<C-q>", ":q<cr>", { desc = "exit" })
@@ -47,7 +49,7 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit Terminal Insert Mode"
 vim.keymap.set("n", "<leader>lp", ":LivePreview start<CR>", { desc = "LivePreview" })
 
 --Transparent
-vim.api.nvim_set_keymap("n", "<leader>s", ":TransparentToggle<cr>", { desc = "Transparent" })
+--vim.api.nvim_set_keymap("n", "<leader>s", ":TransparentToggle<cr>", { desc = "Transparent" })
 
 --CCC
 vim.api.nvim_set_keymap("n", "<leader>c", "<nop>", { desc = "CCC" })
