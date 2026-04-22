@@ -22,7 +22,7 @@ vim.opt.sidescrolloff = 8    --minimum number of columns to keep above and below
 
 -- Load pywal colorscheme and setup
 vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme onedark]])
 
 vim.api.nvim_set_hl(0, "String", { fg = "#03720a" })                 -- green
 vim.api.nvim_set_hl(0, "Comment", { fg = "#888888", italic = true }) -- gray
