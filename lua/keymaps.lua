@@ -14,11 +14,11 @@ vim.keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save without exit" })
 vim.keymap.set("n", "<C-q>", ":q<cr>", { desc = "exit" })
 
 -- telescope
-vim.keymap.set("n", "<leader>f", "<nop>", { desc = "Telescope" })
-vim.keymap.set("n", "<leader>fs", ":Telescope find_files<cr>", { desc = "Find files" })
-vim.keymap.set("n", "<leader>fp", ":Telescope git_files<cr>", { desc = "Git files" })
-vim.keymap.set("n", "<leader>fz", ":Telescope live_grep<cr>", { desc = "live grep" })
-vim.keymap.set("n", "<leader>fo", ":Telescope oldfiles<cr>", { desc = "Old Files" })
+vim.keymap.set("n", "<leader>f", "<nop>", { desc = "Search" })
+vim.keymap.set("n", "<leader>fs", function() Snacks.picker.files() end, { desc = "Find files" })
+vim.keymap.set("n", "<leader>fp", function() Snacks.picker.git_files() end, { desc = "Git files" })
+vim.keymap.set("n", "<leader>fz", function() Snacks.picker.grep() end, { desc = "Live grep" })
+vim.keymap.set("n", "<leader>fo", function() Snacks.picker.recent() end, { desc = "Old Files" })
 
 --file tree
 vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<cr>", { desc = "File Tree" })
