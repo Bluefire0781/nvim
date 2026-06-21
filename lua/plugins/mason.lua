@@ -11,8 +11,8 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "rust_analyzer", "jdtls" },
-        automatic_installation = true,
+        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "jdtls" },
+        automatic_installation = false,
       })
     end,
   },
@@ -21,10 +21,9 @@ return {
     "neovim/nvim-lspconfig",
 
     config = function()
-      --local lsp = require('lspconfig')
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local on_attach = function(client, bufnr)
-        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
       end
 
       -- Lua
@@ -75,15 +74,15 @@ return {
         capabilities = capabilities,
       })
 
-      -- java
+      -- Java
       vim.lsp.config('jdtls', {
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
-      -- Rust
+      -- Rust (installed via Nix, on $PATH — not managed by Mason)
       vim.lsp.config('rust_analyzer', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer" },
+        cmd = { "rust-analyzer" },
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
@@ -96,6 +95,20 @@ return {
             },
           },
         },
+      })
+
+      -- IMPORTANT: vim.lsp.config() only registers configs, it does not
+      -- start them. vim.lsp.enable() is what actually tells Neovim to
+      -- auto-start these servers when a matching filetype is opened.
+      vim.lsp.enable({
+        "lua_ls",
+        "csharp_ls",
+        "html",
+        "ts_ls",
+        "cssls",
+        "pyright",
+        "jdtls",
+        "rust_analyzer",
       })
     end,
   },
