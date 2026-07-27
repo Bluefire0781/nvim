@@ -23,13 +23,14 @@ return {
         async = true,   -- Enable async formatting
         timeout = 3000, -- Reduced timeout for faster feedback
       },
-      vim.keymap.set({ 'n', 'v' }, '<leader>mf', function()
-        conform.format({
-          lsp_fallback = true,
-          async = true,   -- Async formatting in keymap as well
-          timeout = 1000, -- Short timeout for quick formatting
-        })
-      end, { desc = 'Format file or range (in visual mode)' })
     })
+
+    vim.keymap.set({ 'n', 'v' }, '<leader>mf', function()
+      conform.format({
+        lsp_fallback = true,
+        async = true,   -- Async formatting in keymap as well
+        timeout = 1000, -- Short timeout for quick formatting
+      })
+    end, { desc = 'Format file or range (in visual mode)' })
   end,
 }

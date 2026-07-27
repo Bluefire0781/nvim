@@ -11,7 +11,7 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "jdtls" },
+        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "jdtls", "rust_analyzer" },
         automatic_installation = false,
       })
     end,
@@ -28,7 +28,6 @@ return {
 
       -- Lua
       vim.lsp.config('lua_ls', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server" },
         settings = {
           Lua = {
             diagnostics = { globals = { "vim" } },
@@ -40,21 +39,18 @@ return {
 
       -- C#
       vim.lsp.config('csharp_ls', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/csharp-ls" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
       -- HTML
       vim.lsp.config('html', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/vscode-html-language-server", "--stdio" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
       -- TypeScript / JavaScript
       vim.lsp.config('ts_ls', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server", "--stdio" },
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
@@ -62,14 +58,12 @@ return {
 
       -- CSS
       vim.lsp.config('cssls', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/vscode-css-language-server", "--stdio" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
       -- Python
       vim.lsp.config('pyright', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/pyright-langserver", "--stdio" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
@@ -80,9 +74,21 @@ return {
         capabilities = capabilities,
       })
 
-      -- Rust (installed via Nix, on $PATH — not managed by Mason)
+      -- Rust: prefer a Nix-provided rust-analyzer on $PATH (Mason's downloaded
+      -- binary doesn't run on NixOS — missing dynamic linker), otherwise fall
+      -- back to the one Mason installs so this still works on other machines.
+      local function resolve_rust_analyzer()
+        local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
+        for dir in (vim.env.PATH or ""):gmatch("[^:]+") do
+          if dir ~= mason_bin and vim.fn.executable(dir .. "/rust-analyzer") == 1 then
+            return { dir .. "/rust-analyzer" }
+          end
+        end
+        return { mason_bin .. "/rust-analyzer" }
+      end
+
       vim.lsp.config('rust_analyzer', {
-        cmd = { "rust-analyzer" },
+        cmd = resolve_rust_analyzer(),
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {

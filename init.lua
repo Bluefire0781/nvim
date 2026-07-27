@@ -30,4 +30,4 @@ require("lazy").setup({
 for _, name in ipairs({ "keymaps", "options" }) do
     require(name)
 end
-require("luasnip.loaders.from_lua").load({ paths = "C:/Users/andre/AppData/Local/nvim/snippets" }) -- Load custom snippets
+require("luasnip.loaders.from_lua").load({ paths = vim.fn.stdpath("config") .. "/snippets" }) -- Load custom snippets
