@@ -64,6 +64,11 @@ vim.keymap.set('n', '/', ':SearchBoxIncSearch<CR>', { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>v", "<nop>", { desc = "Visual" })
 vim.api.nvim_set_keymap("n", "<leader>vt", ":Themery<cr>", { desc = "Theme", noremap = true, silent = true })
 
+-- trouble (diagnostics list)
+vim.keymap.set("n", "<leader>x", "<nop>", { desc = "Trouble" })
+vim.keymap.set("n", "<leader>xx", ":Trouble diagnostics toggle<cr>", { desc = "Diagnostics (workspace)" })
+vim.keymap.set("n", "<leader>xd", ":Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Diagnostics (buffer)" })
+
 -- lsp
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)

@@ -5,7 +5,7 @@ return {
     require("ccc").setup({
       highlighter = {
         auto_enable = true, -- auto show highlights on buffer enter
-        lsp = f,            -- also highlight colors coming from LSP
+        lsp = true,         -- also highlight colors coming from LSP
       }
     })
   end,
