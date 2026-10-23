@@ -11,8 +11,14 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "jdtls", "rust_analyzer" },
-        automatic_installation = false,
+        -- rust_analyzer only on non-Nix machines: Mason's binary can't run on
+        -- NixOS (missing dynamic linker), a Nix-provided one is used there.
+        ensure_installed = vim.list_extend(
+          { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "jdtls" },
+          vim.fn.isdirectory("/nix/store") == 1 and {} or { "rust_analyzer" }
+        ),
+        -- Servers are enabled manually via vim.lsp.enable() in the lspconfig block.
+        automatic_enable = false,
       })
     end,
   },
