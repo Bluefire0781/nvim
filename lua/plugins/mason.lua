@@ -11,25 +11,30 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "rust_analyzer", "jdtls" },
-        automatic_installation = true,
+        -- rust_analyzer only on non-Nix machines: Mason's binary can't run on
+        -- NixOS (missing dynamic linker), a Nix-provided one is used there.
+        ensure_installed = vim.list_extend(
+          { "lua_ls", "csharp_ls", "html", "ts_ls", "pyright", "cssls", "jdtls" },
+          vim.fn.isdirectory("/nix/store") == 1 and {} or { "rust_analyzer" }
+        ),
+        -- Servers are enabled manually via vim.lsp.enable() in the lspconfig block.
+        automatic_enable = false,
       })
     end,
   },
 
   {
     "neovim/nvim-lspconfig",
+    dependencies = { "hrsh7th/cmp-nvim-lsp" },
 
     config = function()
-      --local lsp = require('lspconfig')
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local on_attach = function(client, bufnr)
-        vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
       end
 
       -- Lua
       vim.lsp.config('lua_ls', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server" },
         settings = {
           Lua = {
             diagnostics = { globals = { "vim" } },
@@ -41,21 +46,18 @@ return {
 
       -- C#
       vim.lsp.config('csharp_ls', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/csharp-ls" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
       -- HTML
       vim.lsp.config('html', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/vscode-html-language-server", "--stdio" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
       -- TypeScript / JavaScript
       vim.lsp.config('ts_ls', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server", "--stdio" },
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
@@ -63,27 +65,37 @@ return {
 
       -- CSS
       vim.lsp.config('cssls', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/vscode-css-language-server", "--stdio" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
       -- Python
       vim.lsp.config('pyright', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/pyright-langserver", "--stdio" },
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
-      -- java
+      -- Java
       vim.lsp.config('jdtls', {
         on_attach = on_attach,
         capabilities = capabilities,
       })
 
-      -- Rust
+      -- Rust: prefer a Nix-provided rust-analyzer on $PATH (Mason's downloaded
+      -- binary doesn't run on NixOS — missing dynamic linker), otherwise fall
+      -- back to the one Mason installs so this still works on other machines.
+      local function resolve_rust_analyzer()
+        local mason_bin = vim.fn.stdpath("data") .. "/mason/bin"
+        for dir in (vim.env.PATH or ""):gmatch("[^:]+") do
+          if dir ~= mason_bin and vim.fn.executable(dir .. "/rust-analyzer") == 1 then
+            return { dir .. "/rust-analyzer" }
+          end
+        end
+        return { mason_bin .. "/rust-analyzer" }
+      end
+
       vim.lsp.config('rust_analyzer', {
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/rust-analyzer" },
+        cmd = resolve_rust_analyzer(),
         on_attach = on_attach,
         capabilities = capabilities,
         settings = {
@@ -96,6 +108,20 @@ return {
             },
           },
         },
+      })
+
+      -- IMPORTANT: vim.lsp.config() only registers configs, it does not
+      -- start them. vim.lsp.enable() is what actually tells Neovim to
+      -- auto-start these servers when a matching filetype is opened.
+      vim.lsp.enable({
+        "lua_ls",
+        "csharp_ls",
+        "html",
+        "ts_ls",
+        "cssls",
+        "pyright",
+        "jdtls",
+        "rust_analyzer",
       })
     end,
   },

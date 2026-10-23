@@ -24,7 +24,7 @@ return {
                 {
                     pane = 2,
                     section = "terminal",
-                    cmd = "/usr/bin/colorscript -e square",
+                    cmd = "colorscript -e square",
                     height = 5,
                     padding = 1,
                 },
@@ -50,9 +50,7 @@ return {
         },
         explorer = { enabled = true },
         indent = { enabled = true },
-        input = { enabled = true },
         picker = { enabled = true },
-        notifier = { enabled = true },
         quickfile = { enabled = true },
         scope = { enabled = true },
         scroll = { enabled = true },

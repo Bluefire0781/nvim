@@ -20,9 +20,20 @@ vim.opt.termguicolors = true -- enable true color support
 vim.opt.scrolloff = 8        -- minimum number of lines to keep above and below the cursor
 vim.opt.sidescrolloff = 8    --minimum number of columns to keep above and below the cursor
 
--- Load pywal colorscheme and setup
 vim.o.background = "dark" -- or "light" for light mode
-vim.cmd([[colorscheme onedark]])
+
+-- error lens: full diagnostic message inline at end of line, colored by severity
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "●",
+    spacing = 4,
+    source = "if_many",
+  },
+  signs = true,
+  underline = true,
+  severity_sort = true,
+  float = { border = "rounded", source = "if_many" },
+})
 
 vim.api.nvim_set_hl(0, "String", { fg = "#03720a" })                 -- green
 vim.api.nvim_set_hl(0, "Comment", { fg = "#888888", italic = true }) -- gray
